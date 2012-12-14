@@ -6,18 +6,18 @@
 typedef int (*ctest_func)(void);
 typedef int (*ctest_func_arg)(void *);
 
-static inline void _ctest_add(int (*test_func)(void), const char *func_name, const char *extra_msg)
+static inline void _ctest_add(ctest_func f, const char *func_name, const char *extra_msg)
 {
-	if (test_func()) {
+	if (f()) {
 		printf("%s %s pass\n", extra_msg, func_name);
 	} else {
 		printf("%s %s failed\n", extra_msg, func_name);
 	}
 }
 
-static inline void _ctest_add_with_arg(int (*test_func)(void *), const char *func_name, void *arg, const char *extra_msg)
+static inline void _ctest_add_with_arg(ctest_func_arg f, const char *func_name, void *arg, const char *extra_msg)
 {
-	if (test_func(arg)) {
+	if (f(arg)) {
 		printf("%s %s pass\n", extra_msg, func_name);
 	} else {
 		printf("%s %s failed\n", extra_msg, func_name);
