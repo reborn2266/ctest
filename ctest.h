@@ -15,7 +15,7 @@ static inline void _ctest_add(int (*test_func)(void), const char *func_name, con
 	}
 }
 
-static inline void _ctest_add_with_arg_internal(int (*test_func)(void *), const char *func_name, void *arg, const char *extra_msg)
+static inline void _ctest_add_with_arg(int (*test_func)(void *), const char *func_name, void *arg, const char *extra_msg)
 {
 	if (test_func(arg)) {
 		printf("%s %s pass\n", extra_msg, func_name);
@@ -29,7 +29,7 @@ static inline void _ctest_add_with_arg_internal(int (*test_func)(void *), const 
 		} while (0)
 
 #define CTEST_ADD_WITH_ARG(test_func, arg, extra_msg) do {\
-			_ctest_add_with_arg_internal((ctest_func_arg)test_func, #test_func, (void *)arg, extra_msg);\
+			_ctest_add_with_arg((ctest_func_arg)test_func, #test_func, (void *)arg, extra_msg);\
 		} while (0)
 
 #define CTEST_EQ(expression, expected) do {\
